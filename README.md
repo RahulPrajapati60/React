@@ -39,3 +39,5 @@ const [color, setCount] = useState(0)
     }
   }, [])
 ```
+# The useRef Hook
+### The useRef hook in React creates a mutable reference object that persists across renders without triggering re-renders when its value changes. It's primarily used to access DOM elements or store mutable values that don't affect the component's rendering.
