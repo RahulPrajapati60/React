@@ -6,7 +6,8 @@
 
 # useEffect
 ### In React, the `useEffect` hook handles side effects in functional components, like data fetching or DOM updates. It runs after render and takes a callback function and an optional dependency array
-```// Case 1: Run on every render 
+```
+// Case 1: Run on every render 
   useEffect(() => {
     alert("Hey I will run on every render")
   })
