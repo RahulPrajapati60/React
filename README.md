@@ -228,3 +228,193 @@ function Dashboard({ user, items }) {
 ```
 
 ---
+## Event Handling
+
+### Handling events in React is a key aspect of building interactive user interfaces. React uses a synthetic event system to handle DOM events in a consistent, performant way.
+---
+
+### **Key Concepts**
+
+1. **Synthetic Events**:
+   - React wraps native DOM events into a `SyntheticEvent` object, providing a consistent API across browsers.
+   - Event handlers are attached to JSX elements using camelCase event names (e.g., `onClick`, `onChange`).
+
+2. **Event Handler Syntax**:
+   - Event handlers are functions defined in your component, passed to elements as props.
+   - Use arrow functions or bind methods to ensure the correct `this` context.
+
+---
+
+### **Basic Event Handling**
+
+#### **1. Handling Click Events**
+```jsx
+function Button() {
+  const handleClick = () => {
+    alert("Button clicked!");
+  };
+
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+
+- The `onClick` prop is assigned the `handleClick` function, which runs when the button is clicked.
+- Do **not** call the function directly (e.g., `onClick={handleClick()}`), as it will execute immediately on render.
+
+#### **2. Passing Arguments to Event Handlers**
+You can pass parameters to event handlers using an arrow function.
+
+```jsx
+function Item({ id, name }) {
+  const handleDelete = (itemId) => {
+    console.log(`Deleting item with ID: ${itemId}`);
+  };
+
+  return (
+    <button onClick={() => handleDelete(id)}>
+      Delete {name}
+    </button>
+  );
+}
+```
+
+#### **3. Handling Form Events**
+Common form events include `onChange`, `onSubmit`, and `onInput`.
+
+```jsx
+function Form() {
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission
+    console.log("Form submitted!");
+  };
+
+  const handleChange = (event) => {
+    console.log("Input value:", event.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" onChange={handleChange} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+- `event.preventDefault()` stops the default behavior (e.g., page reload on form submission).
+- Access input values via `event.target.value`.
+
+---
+
+### **Binding `this` in Class Components**
+In class components, event handlers need proper binding to access `this`.
+
+```jsx
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOn: false };
+    // Bind in constructor
+    this.handleToggle = this.handleToggle.bind(this);
+  }
+
+  handleToggle() {
+    this.setState({ isOn: !this.state.isOn });
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleToggle}>
+        {this.state.isOn ? "ON" : "OFF"}
+      </button>
+    );
+  }
+}
+```
+
+Alternatively, use arrow functions to avoid manual binding:
+
+```jsx
+class Toggle extends React.Component {
+  state = { isOn: false };
+
+  handleToggle = () => {
+    this.setState({ isOn: !this.state.isOn });
+  };
+
+  render() {
+    return (
+      <button onClick={this.handleToggle}>
+        {this.state.isOn ? "ON" : "OFF"}
+      </button>
+    );
+  }
+}
+```
+
+In functional components, binding is unnecessary since they don’t use `this`.
+
+---
+
+### **Common Event Types**
+Here are some frequently used events in React:
+- `onClick`: For clicks on buttons, links, etc.
+- `onChange`: For input, select, or textarea changes.
+- `onSubmit`: For form submissions.
+- `onMouseOver`, `onMouseOut`: For hover effects.
+- `onKeyDown`, `onKeyUp`: For keyboard interactions.
+- `onFocus`, `onBlur`: For input focus and blur.
+
+Example with multiple events:
+
+```jsx
+function InputField() {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      console.log("Enter key pressed!");
+    }
+  };
+
+  const handleFocus = () => {
+    console.log("Input focused!");
+  };
+
+  return (
+    <input
+      type="text"
+      onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      placeholder="Type here"
+    />
+  );
+}
+```
+
+---
+
+### **Event Object Properties**
+The `SyntheticEvent` object provides properties like:
+- `event.target`: The element that triggered the event.
+- `event.type`: The type of event (e.g., "click").
+- `event.preventDefault()`: Stops default behavior.
+- `event.stopPropagation()`: Prevents event bubbling to parent elements.
+
+Example:
+
+```jsx
+function StopPropagation() {
+  const handleClick = (event) => {
+    event.stopPropagation();
+    console.log("Child clicked, propagation stopped.");
+  };
+
+  return (
+    <div onClick={() => console.log("Parent clicked")}>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+}
+```
+
+---
+
