@@ -418,3 +418,192 @@ function StopPropagation() {
 
 ---
 
+### What is React Router DOM?
+`react-router-dom` is a library that enables navigation and routing in React applications, allowing you to create single-page applications (SPAs) with multiple views or pages without full page reloads. It synchronizes the UI with the URL, making it easy to manage navigation, pass parameters, and handle nested routes.
+
+### Installation
+To use `react-router-dom`, install it via npm or yarn:
+```bash
+npm install react-router-dom
+```
+or
+```bash
+yarn add react-router-dom
+```
+
+1. **BrowserRouter**:
+   - Wraps your application to enable routing using the HTML5 history API.
+   - Example:
+     ```jsx
+     import { BrowserRouter } from 'react-router-dom';
+
+     function App() {
+       return (
+         <BrowserRouter>
+           {/* Routes go here */}
+         </BrowserRouter>
+       );
+     }
+     ```
+
+2. **Routes and Route**:
+   - `<Routes>` is a container for defining routes, and `<Route>` defines a specific path and the component to render.
+   - Example:
+     ```jsx
+     import { Routes, Route } from 'react-router-dom';
+     import Home from './Home';
+     import About from './About';
+
+     function App() {
+       return (
+         <BrowserRouter>
+           <Routes>
+             <Route path="/" element={<Home />} />
+             <Route path="/about" element={<About />} />
+           </Routes>
+         </BrowserRouter>
+       );
+     }
+     ```
+
+3. **Link**:
+   - Used to create navigational links without reloading the page.
+   - Example:
+     ```jsx
+     import { Link } from 'react-router-dom';
+
+     function Navbar() {
+       return (
+         <nav>
+           <Link to="/">Home</Link>
+           <Link to="/about">About</Link>
+         </nav>
+       );
+     }
+     ```
+
+4. **NavLink**:
+   - Similar to `<Link>`, but allows styling the active link.
+   - Example:
+     ```jsx
+     import { NavLink } from 'react-router-dom';
+
+     function Navbar() {
+       return (
+         <nav>
+           <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+             Home
+           </NavLink>
+           <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>
+             About
+           </NavLink>
+         </nav>
+       );
+     }
+     ```
+
+5. **useNavigate**:
+   - A hook to programmatically navigate to a different route.
+   - Example:
+     ```jsx
+     import { useNavigate } from 'react-router-dom';
+
+     function Button() {
+       const navigate = useNavigate();
+       return <button onClick={() => navigate('/about')}>Go to About</button>;
+     }
+     ```
+
+6. **URL Parameters**:
+   - Handle dynamic routes using `:param` syntax.
+   - Example:
+     ```jsx
+     import { useParams } from 'react-router-dom';
+
+     function User() {
+       const { id } = useParams();
+       return <h1>User ID: {id}</h1>;
+     }
+
+     // In Routes
+     <Route path="/user/:id" element={<User />} />
+     ```
+
+7. **Nested Routes**:
+   - Routes can be nested to create layouts or sub-pages.
+   - Example:
+     ```jsx
+     import { Outlet } from 'react-router-dom';
+
+     function Dashboard() {
+       return (
+         <div>
+           <h1>Dashboard</h1>
+           <Outlet /> {/* Renders child routes */}
+         </div>
+       );
+     }
+
+     // In Routes
+     <Route path="/dashboard" element={<Dashboard />}>
+       <Route path="profile" element={<Profile />} />
+       <Route path="settings" element={<Settings />} />
+     </Route>
+     ```
+
+8. **useLocation**:
+   - A hook to access the current location object (e.g., pathname, search).
+   - Example:
+     ```jsx
+     import { useLocation } from 'react-router-dom';
+
+     function CurrentPath() {
+       const location = useLocation();
+       return <p>Current path: {location.pathname}</p>;
+     }
+     ```
+
+
+### Example: Full Application
+Here’s a simple example combining the above concepts:
+```jsx
+import { BrowserRouter, Routes, Route, Link, NavLink, useParams } from 'react-router-dom';
+
+function Home() {
+  return <h1>Home Page</h1>;
+}
+
+function About() {
+  return <h1>About Page</h1>;
+}
+
+function User() {
+  const { id } = useParams();
+  return <h1>User ID: {id}</h1>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+          Home
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>
+          About
+        </NavLink>
+        <NavLink to="/user/123" className={({ isActive }) => (isActive ? 'active' : '')}>
+          User
+        </NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/user/:id" element={<User />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
