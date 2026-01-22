@@ -1,7 +1,7 @@
 # React Props and State (with useState Hook)
 
 
-### 1. What Are Props? (The "Read-Only Messages" System)
+### 1. What Are Props?
 
 **Props** (short for "properties") let you pass data *from a parent component to a child component*. It's React's way of making components reusable – like Lego bricks where you customize each one by passing in colors or shapes.
 
@@ -156,18 +156,6 @@ function Counter() {
   const updateAge = () => setUser({ ...user, age: user.age + 1 });
   ```
 
-- **Arrays?** Same deal – spread for updates.
-  
-  ```jsx
-  const [todos, setTodos] = useState(['Learn React', 'Build app']);
-
-  // Add todo
-  const addTodo = (newTodo) => setTodos([...todos, newTodo]);
-
-  // Remove by index
-  const removeTodo = (index) => setTodos(todos.filter((_, i) => i !== index));
-  ```
-
 - **Functional Updates (For Complex Changes)**: When new state depends on old state (avoids stale closures).
   
   ```jsx
@@ -202,7 +190,7 @@ function Counter() {
   }
   ```
 
-- **useState Rules (Golden Laws)**:
+- **useState Rules **:
   1. **Only call hooks at top-level** (not in loops/if/else/nested functions). Why? React relies on order.
   2. **Don't mutate state directly**: No `count++` or `todos[0] = 'new'`. Always use setter + spread (`...`).
   3. **State is local**: Each component instance has its own copy. (For sharing, see "Lifting State Up" below.)
@@ -214,22 +202,6 @@ function Counter() {
 
 **Analogy Wrap-Up**: State is your phone's notifications – it buzzes when something changes, updating your view of the world.
 
----
-
-### 3. Props vs. State: The Big Differences (Quick Table for Clarity)
-
-| Aspect          | Props                          | State (useState)                  |
-|-----------------|--------------------------------|-----------------------------------|
-| **Ownership**   | Parent owns & passes it        | Component owns it internally      |
-| **Mutability**  | Read-only (immutable)          | Mutable (via setter)              |
-| **Flow**        | Down the tree (parent → child) | Stays in one component            |
-| **When to Use** | Customize/reuse child comps    | Handle user input, timers, etc.   |
-| **Example**     | `<Greeting name="Rahul" />`    | `const [name, setName] = useState('Rahul');` |
-| **Sharing**     | Pass via props                 | Lift up to parent for siblings    |
-
-**Mnemonic**: Props = "Passed" (from outside). State = "Self" (internal).
-
----
 
 ### 4. Real-World Patterns: Combining Props + State
 
@@ -280,18 +252,3 @@ function UserProfile({ initialName }) {  // Prop for edit mode
   );
 }
 ```
-
----
-
-### 5. Best Practices & Pro Tips (Level Up!)
-- **Keep State Minimal**: Only store what changes and affects UI. Derive the rest.
-- **Naming**: `[camelCase, setCamelCase]` (e.g., `isLoading, setIsLoading`).
-- **Objects/Arrays**: Always spread (`...`) to create new copies.
-- **Debugging**: Use React DevTools – inspect props/state like a pro.
-- **Advanced Hooks**: Once comfy, try `useReducer` for complex state (like Redux mini-version).
-- **Performance**: Memoize callbacks: `const handleClick = useCallback(() => ..., [deps]);`.
-- **Common Error**: "Can't perform a React state update on an unmounted component" → Cleanup in `useEffect`.
-
----
-
-There you have it – Props and State demystified! Start with a simple counter app, then build a todo list. It's 80% of React mastery. Got questions? Want examples for forms, lists, or `useEffect` next? Or code for a full app? Just say! 😊 Keep coding, Rahul!
