@@ -1,13 +1,5 @@
-### React Props and State (with useState Hook): A Deep Dive, Made Super Easy
+# React Props and State (with useState Hook)
 
-Hey Rahul! If you're diving into React, **Props** and **State** are like the dynamic duo that make your components *alive* and *interactive*. Think of a React app as a family reunion:
-
-- **Props** are like handwritten notes passed from parents to kids (or aunts to cousins). They're read-only – you can share info down the family tree, but no one changes the note itself.
-- **State** is like each person's personal diary. It starts blank, but they can scribble in it anytime, and it changes how they act (e.g., "I'm happy today!" vs. "I'm tired now").
-
-We'll break this down step-by-step: basics first, then deeper stuff, with tons of code examples. I'll use simple analogies and avoid jargon overload. By the end, you'll feel like a pro. Let's go! 🚀
-
----
 
 ### 1. What Are Props? (The "Read-Only Messages" System)
 
