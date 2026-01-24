@@ -1,6 +1,4 @@
----
-
-## 🔹 Rendering in React
+## Rendering in React
 
 Rendering is React’s process of translating your component tree (JSX + state/props) into actual DOM nodes. It’s declarative: you describe *what* the UI should look like given some state, and React figures out *how* to update the DOM efficiently.
 
@@ -10,20 +8,28 @@ Rendering is React’s process of translating your component tree (JSX + state/p
 - **Conditional rendering:** Choosing *which* component or element to render based on conditions.
 
 ### Conditional Rendering Patterns
+
 - **If/else (early return):**
+
   ```jsx
   if (!user) return <Login />;
   return <Dashboard user={user} />;
   ```
+
 - **Ternary operator:**
+
   ```jsx
   {isLoading ? <Spinner /> : <Data />}
   ```
+
 - **Logical AND (`&&`):**
+
   ```jsx
   {cart.length > 0 && <CartSummary />}
   ```
+
 - **Switching components:**
+
   ```jsx
   const View = isAdmin ? AdminPanel : UserPanel;
   return <View />;
@@ -57,44 +63,49 @@ function ProductList({ products }) {
 
 ---
 
-## 🔹 Keys in Depth
+## Keys in Depth
 
 Keys are **identifiers** React uses to track elements between renders. They don’t show up in the DOM—they’re for React’s reconciliation algorithm.
 
 ### Why keys matter
+
 - React compares old vs new lists.
 - With stable keys, React reuses DOM nodes instead of destroying/recreating them.
 - Without proper keys, you get bugs like wrong item updates, lost input focus, or stale component state.
 
 ### Good keys
+
 - Unique, stable IDs (like database `_id`).
 - Composite keys if no single unique field exists:
+
   ```jsx
   key={`${user.id}-${user.role}`}
   ```
 
 ### Bad keys
+
 - **Array index**: breaks when items are reordered/removed.
 - Non-unique values: React can’t distinguish siblings.
 
 ### When index is acceptable
+
 - Static lists (never reordered/removed).
 - Purely presentational, stateless items.
 
----
 
-## 🔹 How Keys Affect Component State
+## How Keys Affect Component State
 
 - Changing a key forces React to **unmount + remount** the component.
 - Useful for resetting local state:
+
   ```jsx
   <Form key={user.id} user={user} />
   ```
+
   → When `user.id` changes, the form resets.
 
----
 
-## 🔹 Real-world Example (MERN E-commerce)
+## Real-world Example (MERN E-commerce)
 
 ```jsx
 function Orders({ orders }) {
@@ -115,9 +126,8 @@ function Orders({ orders }) {
 - Stable key: `order._id` (MongoDB ID).
 - Conditional rendering inside list: different component per status.
 
----
 
-## 🔹 Common Pitfalls
+## Common Pitfalls
 
 - **Key on wrong element:**  
   Must be on the element returned by `map`, not inside child.
@@ -126,9 +136,8 @@ function Orders({ orders }) {
 - **Expensive conditions in render:**  
   Use `useMemo` for heavy filtering/sorting.
 
----
 
-## 🔹 Summary 
+## Summary 
 
 - Rendering = describing UI based on state/props.
 - Conditional rendering = JS logic inside JSX.
@@ -136,6 +145,4 @@ function Orders({ orders }) {
 - Keys = stable, unique identifiers for reconciliation.
 - Changing a key remounts component (resets state).
 - Avoid index as key unless list is static.
-
----
 
