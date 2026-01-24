@@ -132,7 +132,7 @@ function Orders({ orders }) {
 
 ## Quick Summary 
 
-| Topic                     | Best Practice 2025–2026                             |
+| Topic                     | Best Practice                            |
 |---------------------------|-----------------------------------------------------|
 | Conditional Rendering     | Early return > Ternary > && > Object lookup         |
 | List Rendering            | `.map()` + stable `key`                             |
