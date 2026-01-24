@@ -1,3 +1,7 @@
+# Rendering in React
+
+Rendering is React’s process of translating your component tree (JSX + state/props) into actual DOM nodes. It’s declarative: you describe what the UI should look like given some state, and React figures out how to update the DOM efficiently.
+
 
 ```markdown
 # React Rendering, Conditional Rendering, Lists & Keys  
