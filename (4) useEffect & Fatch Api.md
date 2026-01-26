@@ -4,7 +4,7 @@
 
 useEffect `useEffect` is a **React Hook** that lets you run **side effects** in a component.
 
-### Side effects = things like
+### Side effects
 
 * Fetching data from an API
 * Calling backend
@@ -12,7 +12,7 @@ useEffect `useEffect` is a **React Hook** that lets you run **side effects** in 
 * Using timers (`setTimeout`, `setInterval`)
 * Listening to events
 
- **Key idea:**
+**Key idea:**
 
 > `useEffect` runs **after the component renders**
 
