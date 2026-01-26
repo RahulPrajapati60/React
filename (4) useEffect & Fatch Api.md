@@ -1,4 +1,3 @@
----
 
 ## 1️ What is `useEffect`? 
 
@@ -16,7 +15,6 @@ useEffect `useEffect` is a **React Hook** that lets you run **side effects** in 
 
 > `useEffect` runs **after the component renders**
 
----
 
 ## 2️ Basic Syntax of `useEffect`
 
