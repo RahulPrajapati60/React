@@ -21,11 +21,11 @@ It is used with:
 
 Example:
 
-1 Logged-in user
-2 Theme (dark/light)
-3 Language
-4 Cart data
-5 Authentication state
+1. Logged-in user
+2. Theme (dark/light)
+3. Language
+4. Cart data
+5. Authentication state
 
 Problem:
 Passing props deeply like this 
