@@ -125,13 +125,13 @@ function Navbar() {
 
 #  Problems with Raw `useContext`
 
-❌ Repeating `useContext(ThemeContext)` everywhere
-❌ No error handling if used outside provider
-❌ Hard to maintain in large apps
+❌. Repeating `useContext(ThemeContext)` everywhere
+❌. No error handling if used outside provider
+❌. Hard to maintain in large apps
 
 ---
 
-#  🟢🟣Solution: Custom Hook (Industry Pattern)
+#  🟢Solution: Custom Hook (Industry Pattern)
 
 ---
 
